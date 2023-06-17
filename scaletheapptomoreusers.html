@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="saveToLocalStorage(event)">
+        <lable> Name </lable>
+        <input type="text" name="username" required/>
+        <lable> EmailId </lable>
+        <input type="email" name="emailId" required/>
+        <lable> Phone Number </lable>
+        <input type="tel" name="phonenumber" required/>
+        <button> Submit </button>
+    </form>
+    <ul id='listOfitems'></ul>
+    <script>
+        function saveToLocalStorage(event) {
+            event.preventDefault();
+            const name = event.target.username.value;
+            const email = event.target.emailId.value;
+            const phonenumber = event.target.phonenumber.value;
+            const obj = {
+                name,
+                email,
+                phonenumber
+            }
+            localStorage.setItem(obj.email, JSON.stringify(obj))
+            showUserOnScreen(obj)
+            //localStorage.setItem('name', name);
+            //localStorage.setItem('email', email);
+            //localStorage.setItem('phonenumber', phonenumber);
+        }
+        function showUserOnScreen(obj){
+            const parentElem = document.getElementById('listOfitems')
+            const childElem = document.createElement('li')
+            childElem.textContent = obj.mame + ' - ' + obj.email + ' - ' + obj.phonenumber
+            parentElem.appendChild(childElem)
+        }
+
+    </script>
+</body>
+</html>
